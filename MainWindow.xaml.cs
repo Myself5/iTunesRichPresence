@@ -73,6 +73,7 @@ namespace iTunesRichPresence_Rewrite {
             PlaybackDurationCheckBox.IsChecked = Settings.Default.DisplayPlaybackDuration;
             ClearOnPauseCheckBox.IsChecked = Settings.Default.ClearOnPause;
             ExperimentsCheckBox.IsChecked = Settings.Default.ExperimentsEnabled;
+            RestartiTunesCheckBox.IsChecked = Settings.Default.RestartiTunes;
             MinimizeOnStartupCheckBox.IsChecked = Settings.Default.MinimizeOnStartup;
             ExperimentsButton.Visibility =
                 Settings.Default.ExperimentsEnabled ? Visibility.Visible : Visibility.Collapsed;
@@ -273,6 +274,12 @@ namespace iTunesRichPresence_Rewrite {
             Settings.Default.Save();
         }
 
+        private void RestartiTunesCheckBox_OnClick(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.RestartiTunes = RestartiTunesCheckBox.IsChecked ?? false;
+            Settings.Default.Save();
+        }
+
         private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e) {
             if (_bridge == null) {
                 await this.ShowMessageAsync("Failed to create COM object",
@@ -289,6 +296,7 @@ namespace iTunesRichPresence_Rewrite {
         private void menuItem_OnClick(object Sender, EventArgs e)
         {
             // Close the form, which closes the application.
+            _bridge.Shutdown();
             this.Close();
         }
     }

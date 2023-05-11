@@ -91,7 +91,11 @@ namespace iTunesRichPresence_Rewrite {
         private void Timer_OnTick(object sender, EventArgs e) {
             try {
                 if (ITunes == null) {
-                    ITunes = new iTunesApp();
+                    if (Settings.Default.RestartiTunes) {
+                        ITunes = new iTunesApp();
+                    } else {
+                        Shutdown();
+                    }
                 }
 
                 if (ITunes.CurrentTrack == null || (Settings.Default.ClearOnPause && ITunes.PlayerState != ITPlayerState.ITPlayerStatePlaying)) {

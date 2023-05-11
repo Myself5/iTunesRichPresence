@@ -79,7 +79,8 @@
                     </Grid>
                     <CheckBox x:Name="ClearOnPauseCheckBox" Content="Clear status when paused" HorizontalAlignment="Left" Click="ClearOnPauseCheckBox_OnClick" Grid.Row="4" Margin="0,0,0,15"/>
                     <CheckBox x:Name="ExperimentsCheckBox" Content="Enable experiments" HorizontalAlignment="Left" Click="ExperimentsCheckBox_OnClick" Grid.Row="5" Margin="0,0,0,15"/>
-                    <Grid Grid.Row="6" Margin="0,0,0,15">
+                    <CheckBox x:Name="RestartiTunesCheckBox" Content="Restart iTunes on close" HorizontalAlignment="Left" Click="RestartiTunesCheckBox_OnClick" Grid.Row="6" Margin="0,0,0,15"/>
+                    <Grid Grid.Row="7" Margin="0,0,0,15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="3*"/>
@@ -87,8 +88,8 @@
                         <Label Name="PatreonEmailLabel" Content="Patreon email:" Grid.Column="0"/>
                         <TextBox Name="PatreonEmailTextBox" Grid.Column="1"/>
                     </Grid>
-                    <CheckBox x:Name="AlbumArtCheckBox" Content="Enable album art support" HorizontalAlignment="Left" Click="ExperimentsCheckBox_OnClick" Grid.Row="7" Margin="0,0,0,15"/>
-                    <Label Name="PatreonStatusLabel" Content="Patreon status: Unchecked" Grid.Row="8" Margin="0,0,0,15"/>
+                    <CheckBox x:Name="AlbumArtCheckBox" Content="Enable album art support" HorizontalAlignment="Left" Click="ExperimentsCheckBox_OnClick" Grid.Row="8" Margin="0,0,0,15"/>
+                    <Label Name="PatreonStatusLabel" Content="Patreon status: Unchecked" Grid.Row="9" Margin="0,0,0,15"/>
 
                 </Grid>
             </controls:Flyout>

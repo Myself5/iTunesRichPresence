@@ -154,5 +154,17 @@ namespace iTunesRichPresence_Rewrite.Properties {
                 this["MinimizeOnStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RestartiTunes {
+            get {
+                return ((bool)(this["RestartiTunes"]));
+            }
+            set {
+                this["RestartiTunes"] = value;
+            }
+        }
     }
 }
