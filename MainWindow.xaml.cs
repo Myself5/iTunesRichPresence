@@ -28,6 +28,8 @@ namespace iTunesRichPresence_Rewrite {
     public partial class MainWindow {
 
         private readonly NotifyIcon _notifyIcon;
+        private System.Windows.Forms.ContextMenu _contextMenu;
+        System.Windows.Forms.MenuItem _menuItem;
         private DiscordBridge _bridge;
 
         private readonly Release _latestRelease;
@@ -41,10 +43,20 @@ namespace iTunesRichPresence_Rewrite {
 
             _lastFocusedTextBox = PlayingTopLineFormatTextBox;
 
-            _notifyIcon = new NotifyIcon {Text = "iTunesRichPresence", Visible = false, Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location)};
+            _menuItem = new System.Windows.Forms.MenuItem();
+            _menuItem.Index = 0;
+            _menuItem.Text = "Exit";
+            _menuItem.Click += new System.EventHandler(menuItem_OnClick);
+
+            _contextMenu = new System.Windows.Forms.ContextMenu();
+            _contextMenu.MenuItems.AddRange(
+                    new System.Windows.Forms.MenuItem[] { _menuItem });
+
+            _notifyIcon = new NotifyIcon {Text = "iTunesRichPresence", Visible = true, Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location)};
             _notifyIcon.MouseDoubleClick += (sender, args) => {
                 SetVisibility(true);
             };
+            _notifyIcon.ContextMenu = _contextMenu;
 
             ThemeComboBox.ItemsSource = ThemeManager.Accents.Select(accent => accent.Name);
             ThemeComboBox.SelectedItem = Settings.Default.Accent;
@@ -142,7 +154,6 @@ namespace iTunesRichPresence_Rewrite {
         private void SetVisibility(bool visible) {
             ShowInTaskbar = visible;
             Visibility = visible ? Visibility.Visible : Visibility.Hidden;
-            _notifyIcon.Visible = !visible;
             WindowState = visible ? WindowState.Normal : WindowState.Minimized;
             if (visible) {
                 ShowWindow(new WindowInteropHelper(this).Handle, 9);
@@ -273,6 +284,12 @@ namespace iTunesRichPresence_Rewrite {
         private void MinimizeOnStartupCheckBox_OnClick(object sender, RoutedEventArgs e) {
             Settings.Default.MinimizeOnStartup = MinimizeOnStartupCheckBox.IsChecked ?? false;
             Settings.Default.Save();
+        }
+
+        private void menuItem_OnClick(object Sender, EventArgs e)
+        {
+            // Close the form, which closes the application.
+            this.Close();
         }
     }
 }
